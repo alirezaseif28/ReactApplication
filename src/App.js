@@ -12,8 +12,8 @@ class App extends Component {
     showPanel: false
   }
   toogleFunc = () => {
-    
-    const isShowPanel  = this.state.showPanel;
+
+    const isShowPanel = this.state.showPanel;
     console.log(isShowPanel);
     this.setState({
       showPanel: !isShowPanel
@@ -23,19 +23,22 @@ class App extends Component {
 
 
   render() {
+
+    let persons = null;
+    if (this.state.showPanel === true) {
+      persons = (<div>
+        {this.state.Persons.map(person => {
+          return <Person 
+                  name={person.name} 
+                  age={person.age} />
+        })}
+      </div>)
+    }
+
     return <div className="App">
-      <button onClick={this.toogleFunc}>Switch Name</button>
+      <button onClick={this.toogleFunc}>Toggle</button>
       <h1>I am React Application </h1>
-      {
-      this.state.showPanel ?
-          <div>
-            <Person name={this.state.Persons[0].name} age={this.state.Persons[0].age} >I am Alireza</Person>
-            <Person name={this.state.Persons[1].name} age={this.state.Persons[1].age} >He is Brother</Person>
-            <Person name={this.state.Persons[2].name} age={this.state.Persons[2].age} >He is Brother</Person>
-          </div>
-          : null
-         
-      }
+      {persons}
     </div>
     //return React.createElement('div',{class:'App'},React.createElement('h1',null,'Alireza seif');
   }
